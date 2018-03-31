@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Life_CycleRentals.Models
 {
-    public class ExternalLoginConfirmationViewModel
-    {
-        [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-    }
+    //public class ExternalLoginConfirmationViewModel
+    //{
+    //    [Required]
+    //    [Display(Name = "Email")]
+    //    public string Email { get; set; }
+    //}
 
     public class ExternalLoginListViewModel
     {
@@ -64,6 +64,11 @@ namespace Life_CycleRentals.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "Employee Number")]
+        public string EmployeeNumber { get; set; }
+
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

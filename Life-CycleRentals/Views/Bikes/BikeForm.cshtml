@@ -1,0 +1,63 @@
+﻿@model Life_CycleRentals.ViewModels.BikeFormViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("Save", "Bikes"))
+{
+
+    @Html.ValidationSummary(true, "Please fix the following errors:")
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Picture)
+        @Html.TextBoxFor(m => m.Picture, new { @class = "form-control", @placeholder = "Please add a image url" })
+        @Html.ValidationMessageFor(m => m.Picture)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.StyleId)
+        @Html.DropDownListFor(m => m.StyleId, new SelectList(Model.Styles, "Id", "Name"), "Select Bike Style", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.StyleId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.YearBuilt)
+        @Html.TextBoxFor(m => m.YearBuilt, "{0:d MMM yyyy}", new { @class = "form-control", @placeholder = "dd/mm/yyyy" })
+        @Html.ValidationMessageFor(m => m.YearBuilt)
+    </div>
+    
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.NumberInStock)
+        @Html.TextBoxFor(m => m.NumberInStock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.NumberInStock)
+        
+    </div>
+     
+       @Html.HiddenFor(m => m.Id)
+       @Html.AntiForgeryToken()
+       <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts{
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
+
+
+
+
+

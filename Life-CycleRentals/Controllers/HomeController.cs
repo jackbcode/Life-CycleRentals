@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Life_CycleRentals.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()

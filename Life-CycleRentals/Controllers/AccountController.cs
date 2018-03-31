@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Life_CycleRentals.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Life_CycleRentals.Controllers
 {
@@ -151,11 +152,29 @@ namespace Life_CycleRentals.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                { UserName = model.Email,
+                    Email = model.Email,
+                    EmployeeNumber = model.EmployeeNumber
+
+                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    ////Temp code - set authorization roles
+
+                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+
+                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+                    //await roleManager.CreateAsync(new IdentityRole("CanManageBikes"));
+
+                    //await UserManager.AddToRoleAsync(user.Id, "CanManageBikes");
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                   
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

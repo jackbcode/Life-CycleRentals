@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Life_CycleRentals.Models.Rental>
+
+
+@{
+    ViewBag.Title = "Rental List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Rentals</h2>
+
+<br />
+<table id="rentals" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Bike</th>
+            <th>Date Rented</th>
+            <th>Date Returned</th>
+
+        </tr>
+    </thead>
+</table>
+
+@section scripts
+{
+
+    <script>
+    $(document).ready(function () {
+           var table = $("#rentals").DataTable({
+               ajax: {
+                   url: "/api/rental",
+                   dataSrc: ""
+               },
+               columns: [
+
+                   {
+                       data: "customer.name",
+                       render: function (data, type, bike) {
+                           return data
+                       }
+                   },
+
+                   {
+                       data: "bike.name",
+                       render: function (data, type, bike) {
+                           return data
+                       }
+                   },
+
+                   {
+                       data: "dateRented",
+                       render: function (data,type, full ) {
+                           format: "D-MM-YYYY"
+                           return (data) ? moment(data).format('HH:mm | DD/MM/YYYY') : '';
+                       }
+                   },
+
+                   {
+                       data: "dateReturned",
+                       render: function (data/*, type, bike*/) {
+                           return data
+                       }
+                   },
+
+
+               ]
+            });
+
+
+
+    });
+    </script>
+}

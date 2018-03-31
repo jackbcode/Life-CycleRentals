@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Life_CycleRentals.Models.Bike>
+
+@{
+    ViewBag.Title = "Bikes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bikes</h2>
+
+<br />
+<table id ="bikes" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Bikes Available</th>
+            <th>Image</th>
+            <th>Style</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @*@foreach (var bike in Model)
+        {
+            <tr>
+                <td><img src="@Url.Content(bike.Picture)" alt="Bike" /></td>
+                @*<td>@Html.ActionLink(bike.Name, "Edit","Bikes", new { id = bike.Id }, null) </td>
+                <td>@bike.Style.Name</td>
+            </tr>
+        }*@
+
+    </tbody>
+</table>
+
+@section scripts
+{
+
+<script>
+       $(document).ready(function () {
+           var table = $("#bikes").DataTable({
+               ajax: {
+                    url: "/api/bikes",
+                   dataSrc: ""
+               },
+               columns: [
+
+                   {
+                       data: "name",
+                   },
+               
+                   {
+                       data: "picture",
+                       render: function (data, type, full) {
+                           return '<img src="' + data + '" style="height:200px;width:300px;" />';
+                       }
+                   },
+
+                    {
+                       data: "style.name"
+                    },
+
+               ]
+            });
+
+        });
+    </script>
+}
